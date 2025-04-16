@@ -151,14 +151,16 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 
 
 export const logout = catchAsyncErrors(async (req, res, next) => {
-  res.status(200).cookie("token", "", {
-    expires: new Date(Date.now()),
+  res.status(200).clearCookie("token", {
     httpOnly: true,
+    secure: true,
+    sameSite: 'None',
   }).json({
     success: true,
     message: "Logged out successfully"
   });
-});
+});  
+
 
 
 export const getUser = catchAsyncErrors(async (req, res, next) => {
